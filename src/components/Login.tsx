@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Text,View,TextInput,Dimensions,StyleSheet, Button, Alert, TouchableOpacity} from 'react-native';
+import {Text,View,TextInput,Dimensions,StyleSheet, Button, Alert, TouchableOpacity, ImageBackground} from 'react-native';
 
 //import Button from '../lib/Button';
 
@@ -17,6 +17,8 @@ class LoginForm{
     this.password = password;
   }
 }
+
+const image = require('../../public/img/background.jpg');
 
 const Login = ({navigation}:any): React.JSX.Element => {
     const { width, height } = Dimensions.get("window");
@@ -41,7 +43,12 @@ const Login = ({navigation}:any): React.JSX.Element => {
         },
         buttonRegister: {
           padding: '2%'
-        }
+        },
+        imgBackground: {
+          width: '100%',
+          height: '100%',
+          flex: 1 
+        },
       });
     
     const handleSubmit = (): void => {
@@ -71,25 +78,27 @@ const Login = ({navigation}:any): React.JSX.Element => {
     }
 
     return (
-      <View style={styles.form}>
-          <TextInput 
-              placeholder="Email"
-              maxLength={255}
-              onChangeText={value => onChangeLogin(value)}
-          />
-          <TextInput
-              secureTextEntry={true}
-              placeholder="Password"
-              maxLength={255}
-              onChangeText={value => onChangePassword(value)}
-          />
-          <TouchableOpacity style={styles.buttonAuth}>
-            <Button title='Войти' onPress={handleSubmit}/>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.buttonRegister}>
-            <Button title='Зарегистрироваться' onPress={register}/>
-          </TouchableOpacity>
-      </View>
+      <ImageBackground source={image} style={styles.imgBackground}>
+        <View style={styles.form}>
+            <TextInput 
+                placeholder="Email"
+                maxLength={255}
+                onChangeText={value => onChangeLogin(value)}
+            />
+            <TextInput
+                secureTextEntry={true}
+                placeholder="Password"
+                maxLength={255}
+                onChangeText={value => onChangePassword(value)}
+            />
+            <TouchableOpacity style={styles.buttonAuth}>
+              <Button title='Войти' onPress={handleSubmit}/>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.buttonRegister}>
+              <Button title='Зарегистрироваться' onPress={register}/>
+            </TouchableOpacity>
+        </View>
+      </ImageBackground>
     );
 }
 
